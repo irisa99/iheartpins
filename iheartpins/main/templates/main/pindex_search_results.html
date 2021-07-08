@@ -1,0 +1,21 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Pindex Search Results | {% endblock %}
+
+{% block content %}
+    <div class="columns is-multiline mb-6">
+        <div class="column is-12 mt-6 mb-6">
+            <h2 class="is-size-3">Pindex Search Results</h2>
+            <h3>Search term: "{{ query }}"</h3>
+        </div>
+        {% if items %}
+            {% for item_image in query_item_images %}
+                {% include 'main/parts/list_item.html' %}
+            {% endfor %}
+        {% else %}
+            <p>Didn't find what you were looking for?
+                <a href="{% url 'main:submit' %}">Submit a request to add a pin to our Pindex.</a>
+            </p>
+        {% endif %}
+    </div>
+{% endblock %}

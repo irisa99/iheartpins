@@ -1,0 +1,49 @@
+{% extends "main/base.html" %}
+{% block title %}{{ item.name }} | {% endblock %}
+{% block content %}
+<h1 class="title is-2">{{ item.name }}</h1>
+    <div class="columns is-multiline">
+        <div class="column is-4">
+            {% if main_item_images %}
+                <figure class="image is-square mb-6">
+                    <img src="{{ main_item_primary_image.image.url }}">
+                </figure>
+            {% endif %}
+        </div>
+        <div class="column is-8">
+            <div class="control">
+                <button class="button is-dark">
+                    <span>Add to Pinventory</span>
+                    <span class="icon is-small"><i class="fas fa-shopping-cart"></i></span>
+                    <a href="#"></a>
+                </button>
+            </div>
+            <div class="control">
+                <button class="button is-dark">
+                    <span>Search for Available Items</span>
+                    <span class="icon is-small"><i class="fas fa-shopping-cart"></i></span>
+                    <a href="#"></a>
+                </button>
+            </div>
+           <div>
+               <form method="get" action="{% url 'trans:search_available' %}">
+                    <div class="field has-addons">
+                        <p class="control">
+                            <input type="text" class="input" placeholder="Search Available..." name="query">
+                        </p>
+                        <p class="control">
+                            <button class="button is-dark">Search</button>
+                        </p>
+                    </div>
+                </form>
+           </div>
+        </div>
+    <div class="columns is-multiline">
+        <div class="column is-12">
+            <h2 class="subtitle">Similar Pins</h2>
+        </div>
+        {% for item_image in similar_item_images %}
+            {% include 'main/parts/list_item.html' %}
+        {% endfor %}
+    </div>
+{% endblock content %}

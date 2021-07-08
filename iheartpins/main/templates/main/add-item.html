@@ -1,0 +1,38 @@
+{% extends "main/base.html" %}
+{% load crispy_forms_tags %}
+{% crispy form form.get_formhelper %}
+
+{% block title %}Submit Request | {% endblock title %}
+{% block content %}
+    <h1 class="title">Suggest a pin or set to add to the iheartpins Pindex</h1>
+        <form method="post" action="." enctype="multipart/form-data">
+            {% csrf_token %}
+            <div>
+                <fieldset id="form1">
+                    {{ form1|crispy }}
+                </fieldset>
+                    {% if form1.type.value == '1' %}
+                        <fieldset id="form2">
+                            {{ form2|crispy }}
+                            {{ formset.management_form|crispy }}
+                                {% for form in formset %}
+                                    {{ form }} <br />
+                                {% endfor %}
+                        </fieldset>
+                    {% else %}
+                        <fieldset id="form3">
+                            {{ form3|crispy }}
+                            {{ formset.management_form|crispy }}
+                                {% for form in formset %}
+                                    {{ form }} <br />
+                                {% endfor %}
+                        </fieldset>
+                    {% endif %}
+            </div>
+                <div class="field">
+                    <div class="control">
+                        <button class="button is-dark" type="submit">Submit Item</button>
+                    </div>
+                </div>
+        </form>
+{% endblock content%}

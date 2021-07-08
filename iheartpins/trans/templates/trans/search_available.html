@@ -1,0 +1,79 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Search Results | {% endblock %}
+
+{% block content %}
+  <div class="columns is-multiline mb-6">
+    <div class="column is-12 mb-6">
+      <h2 class="is-size-3">Available Items</h2>
+    </div>
+  </div>
+  <div>
+      {% if listings %}
+        <table class="table is-fullwidth">
+            <thead>
+                <tr>
+                    <th>Price</th>
+                    <th>Photo</th>
+                    <th>User</th>
+                    <th>Description</th>
+                    <th>Quantity Available</th>
+                    <th>Quantity</th>
+                    <th>Offer a Trade</th>
+                </tr>
+            </thead>
+          <tbody>
+            {% for listing in listings %}
+                    <tr>
+                        <td>$ {{ listing.price }}</td>
+                        <td>
+                            {% if listing.image %}
+                            <figure class="image is-square">
+                                <img src="{{ listing.image.image }}">
+                            </figure>
+                            {% else %}
+                            <figure class="image is-square">
+                                <img src="{{ listing.pinventory_content.item.image.image }}">
+                            </figure>
+                            {% endif %}
+                        </td>
+                        <td><a href="#">{{ listing.pinventory_content.pinventory.owner.username }}</a>
+                        </td>
+                        <td>
+                            {% if listing.descrip %}
+                            <a href="#">{{ listing.descrip }}</a>
+                            {% endif %}
+                        </td>
+                        <td>{{ listing.qty_available }}</td>
+                        <td>
+                        <form method="post" action="">
+                            {% csrf_token %}
+                            <div class="field">
+                                <div class="control">
+                                    <input type="number" name="quantity" value="1" class="input" min="1">
+                                </div>
+                                <div class="control">
+                                    <button class="button is-dark" name="listing_id" value="{{ listing.id }}">
+                                        <span>Add to Cart</span>
+                                        <span class="icon is-small"><i class="fas fa-shopping-cart"></i></span>
+                                    </button>
+                                </div>
+                            </div>
+
+                        </form>
+                        </td>
+                        <td><a href="#">Trade</a></td>
+                    </tr>
+            {% endfor %}
+          </tbody>
+
+        </table>
+      {% else %}
+      <p>No available items found.</p>
+      {% endif %}
+  </div>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}
