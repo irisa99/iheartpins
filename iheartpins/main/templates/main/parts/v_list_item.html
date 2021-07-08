@@ -1,0 +1,19 @@
+<div class="column is-2 item-list-item">
+    <div class="box">
+        <figure class="image is-square mb-4">
+            <img src="{{ item_image.image.url }}">
+        </figure>
+            <h2 class="subtitle is-6">{{ item_image.item }}</h2>
+                <div class="buttons are-small">
+                    <a href="#" class="button is-dark">
+                        <span class="icon is-small"><i class="fas fa-edit"></i></span>
+                    </a>
+                    <a href="#" class="button is-dark">
+                        <span class="icon is-small"><i class="fas fa-trash-alt"></i></span>
+                    </a>
+                    <a href="{% url 'main:item' item_image.item.slug %}" class="button is-dark">
+                        <span>Details</span>
+                    </a>
+                </div>
+    </div>
+</div>

@@ -1,0 +1,117 @@
+{% extends 'main/base.html' %}
+
+{% block title %}Cart | {% endblock %}
+
+{% block content %}
+
+
+
+<section class="section pt-1">
+    <h1 class="title">Cart</h1>
+        {% if cart %}
+        <div class="box is-multiline mb-12">
+            <div class="container">
+                <div class="table">
+                    <table class="table is-fullwidth">
+                        <thead>
+                            <th></th>
+                            <th>Item</th>
+                            <th>Description</th>
+                            <th>Seller</th>
+                            <th class="has-text-right">Price</th>
+                            <th class="has-text-right">Quantity</th>
+                            <th class="has-text-right">Extended Price</th>
+                            <th class="is-narrow"></th>
+                        </thead>
+                        <tbody>
+                            {% for cart_item in cart %}
+                                <tr>
+                                    <td>
+                                        {% if cart_item.listing.image %}
+                                        <figure class="image is-64x64 mb-4">
+                                            <img src="{{ cart_item.listing.image.image }}">
+                                        </figure>
+                                        {% else %}
+                                        <figure class="image is-64x64 mb-4">
+                                            <img src="{{ cart_item.listing.pinventory_content.item.image.image }}">
+                                        </figure>
+                                        {% endif %}
+                                    </td>
+                                    <td>
+                                        {{ cart_item.listing.pinventory_content.item.name }}
+                                    </td>
+                                    <td>
+                                        {% if cart_item.listing.descrip %}
+                                            {{ cart_item.listing.descrip }}
+                                        {% endif %}
+                                    </td>
+                                    <td>{{ cart_item.listing.pinventory_content.pinventory.owner.username }}</td>
+                                    <td class="has-text-right">
+                                        ${{ cart_item.listing.price|floatformat:2 }}
+                                    </td>
+                                    <td class="has-text-right">
+                                        {{ cart_item.quantity }}
+                                        <a href="?change_quantity={{ cart_item.listing.id }}&quantity=-1">-</a>
+                                        <a href="?change_quantity={{ cart_item.listing.id }}&quantity=1">+</a>
+                                    </td>
+                                    <td class="has-text-right">
+                                        ${{ cart_item.total_price|floatformat:2 }}
+                                    </td>
+                                    <td><a href="?remove_from_cart={{ cart_item.listing.id }}" class="delete">Remove</a></td>
+                                </tr>
+                            {% endfor %}
+                        </tbody>
+                            <tfoot>
+                                <tr>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td></td>
+                                    <td class="has-text-right"><strong>Subtotal</strong></td>
+                                    <td class="has-text-right" ><strong>${{ cart.get_total_price|floatformat:2 }}</strong></td>
+                                    <td></td>
+                                </tr>
+                            </tfoot>
+                    </table>
+                </div>
+            </div>
+        </div>
+        <div class="columns">
+            <div class="column is-3 is-offset-9">
+                <a class="button is-success is-2 is-fullwidth" name="checkout" href="{% url 'orders:checkout' %}">
+                    <span>Checkout</span>
+                    <span class="icon is-small"><i class="fas fa-shopping-cart"></i></span>
+                </a>
+            </div>
+        </div>
+    {% else %}
+        <div class="box mb-6">
+            <div class="table">
+                <table class="table is-fullwidth">
+                    <thead>
+                        <th></th>
+                        <th>Item</th>
+                        <th>Description</th>
+                        <th>Seller</th>
+                        <th class="has-text-right">Price</th>
+                        <th class="has-text-right">Quantity</th>
+                        <th class="has-text-right">Extended Price</th>
+                        <th class="is-narrow"></th>
+                    </thead>
+                    <tbody>
+                        <tr>
+                            <td></td>
+                        </tr>
+                    </tbody>
+                    <tfoot>
+                        <tr>
+                            <p class="is-size-5 mb-5 mt-2">Your cart is empty...</p>
+                        </tr>
+                    </tfoot>
+                </table>
+            </div>
+        </div>
+        {% endif %}
+</section>
+{% endblock %}

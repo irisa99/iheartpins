@@ -1,0 +1,14 @@
+{% extends "main/base.html" %}
+
+{% block content %}
+<h1 class="title">Home Page</h1>
+    <div class="columns is-multiline mb-6">
+        <div class="column is-12 mt-6 mb-6">
+            <h2 class="is-size-3">Check out these pins!</h2>
+        </div>
+        {% for item_image in images_primary %}
+            {% include 'main/parts/list_item.html' %}
+        {% endfor %}
+    </div>
+
+{% endblock content %}
