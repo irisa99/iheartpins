@@ -1,0 +1,77 @@
+{% extends 'main/base.html' %}
+
+{% block title %}My Orders | {% endblock %}
+
+{% block content %}
+<div class="section">
+  <div class="columns is-multiline mb-6">
+    <div class="column is-12 mb-6">
+      <h2 class="is-size-3">Sold Items</h2>
+    </div>
+  </div>
+  <div>
+      {% if orders %}
+        <table class="table is-fullwidth">
+            <thead>
+                <tr>
+                    <th>Order No.</th>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Description</th>
+                    <th>Sale Date</th>
+                    <th>Sold To</th>
+                    <th>Name & Address</th>
+                    <th>Status</th>
+                    <th>Ship Item</th>
+                </tr>
+            </thead>
+          <tbody>
+
+                {% for listing in listings %}
+                    {% for order_item in listing.order_item %}
+                      <tr>
+                          <td>{{ order_item.order.id }}<br>{{ solditem.order.id }}</td>
+                            <td>
+                                {% if listing.image %}
+                                    <figure class="image is-square">
+                                        <img src="{{ listing.image.image }}">
+                                    </figure>
+                                {% else %}
+                                    <figure class="image is-square">
+                                        <img src="{{ listing.pinventory_content.item.image.image }}">
+                                    </figure>
+                                {% endif %}
+                            </td>
+                            <td>$ {{ listing.price }}</td>
+                            <td>{{ order_item.quantity }}</td>
+                            <td>
+                                {% if listing.descrip %}
+                                <a href="#">{{ listing.descrip }}</a>
+                                {% endif %}
+                            </td>
+                            <td>{{ order_item.order.date_created|date:"F j, Y g:i a" }}</td>
+                            <td>{{ order_item.order.buyer.username }}</td>
+                            <td>
+                                {{ order_item.order.buyer_firstname }} {{ order_item.order.buyer_lastname }}<br>
+                                {{ order_item.order.ship_to.street1 }}<br>
+                                {{ order_item.order.ship_to.city }}, {{ order_item.order.ship_to.state }} {{ order_item.order.ship_to.postalcode }}
+                            </td>
+                            <td>{{ order_item.order.status }}</td>
+                            <td></td>
+                    </tr>
+                {% endfor %}
+            {% endfor %}
+          </tbody>
+
+        </table>
+      {% else %}
+      <p>No available items found.</p>
+      {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

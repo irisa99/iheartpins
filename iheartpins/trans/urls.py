@@ -10,4 +10,5 @@ app_name = 'trans'
 urlpatterns = [
     # path('item-detail/<slug:item_slug>/', views.item_detail, name='item'),
     path('search-available/', views.search_listings, name='search_available'),
+    path('orders/', views.seller_orders, name='orders'),
 ]

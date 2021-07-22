@@ -1,11 +1,15 @@
 from django.http import response
 from cart.cart import Cart
 from .models import Order, OrderItem
-from paypalcheckoutsdk.orders import OrdersGetRequest
-from.paypal import PayPalClient
+from trans.models import Listing
+from main.models import Pinventory, PinventoryContent
+from django.contrib.auth import get_user_model
+
+User = get_user_model()
 
 
-def checkout(request, user, email, ship_to, cart_total, shipping, sales_tax, total_paid, gateway):
+
+def checkout(request, user, email, ship_to, cart_total, shipping, sales_tax, total_paid, gateway, payment_intent):
     cart = Cart(request)
     order = Order.objects.create(
         buyer=user,
@@ -18,15 +22,19 @@ def checkout(request, user, email, ship_to, cart_total, shipping, sales_tax, tot
         sales_tax=sales_tax,
         total_paid=total_paid,
         gateway=gateway,
+        payment_intent=payment_intent,
     )
 
     for cart_item in Cart(request):
+        listing = Listing.objects.get(pk=cart_item['listing']['id'])
+        v = PinventoryContent.objects.get(pk=cart_item['listing']['pinventory_content']['id'])
+        seller = User.objects.get(pk=v.pinventory.owner.id)
         OrderItem.objects.create(
             order=order,
-            listing=cart_item['listing'],
+            listing=listing,
             quantity=cart_item['quantity'],
-            price=cart_item['listing'].price,
-            seller=cart_item['listing'].pinventory.owner,
+            price=cart_item['listing']['price'],
+            seller=seller,
         )
     return order
 
