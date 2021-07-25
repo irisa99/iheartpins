@@ -7,8 +7,7 @@ User = get_user_model()
 app_name = 'orders'
 
 urlpatterns = [
-    path('checkout/', views.order_payment, name="checkout"),
-    path('payment/', views.payment, name="payment"),
+    path('checkout/', views.payment, name='checkout'),
     path('success/', views.success, name='success'),
 ]
 

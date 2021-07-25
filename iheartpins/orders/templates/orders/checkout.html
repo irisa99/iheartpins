@@ -75,14 +75,17 @@
 
                     <div class="column">
                         <p><strong>Ship to:</strong></p>
+                        {% if not user == AnonymousUser %}
                         <p class="ml-5 mt-2">{{ user.name }}<br>
                             {{ ship_to.street1 }}<br>
                                 {% if ship_to.street2 %}
                                     {{ ship_to.street2 }}<br>
                                 {% endif %}
                             {{ ship_to.city }}, {{ ship_to.state }} {{ ship_to.postalcode }}</p><br>
+                        {% else %}
+                        <p class="ml-5 mt-2">AnonymousUser</p><br>
+                        {% endif %}
                         <p></p><br>
-
 
                         <div class="columns is-mobile">
                             <div class="column is-half">
@@ -95,20 +98,16 @@
                                 <form method="post" action="." id="checkout-form">
                                     {% csrf_token %}
                                     <div class="field" id="cart_total">
-                                        <input type="hidden" name="cart_total" value="{{ cart.get_total_price|floatformat:2 }}">
-                                            <p class="has-text-right"><strong>$ {{ cart.get_total_price|floatformat:2 }}</strong></p><br>
+                                        <p class="has-text-right"><strong>$ {{ cart.get_total_price|floatformat:2 }}</strong></p><br>
                                     </div>
                                     <div class="field" id="shipping">
-                                        <input type="hidden" name="shipping" value="0.00">
-                                            <p class="has-text-right"><strong>$ 0.00</strong></p><br>
+                                        <p class="has-text-right"><strong>$ {{ shipping }}</strong></p><br>
                                     </div>
                                     <div class="field" id="sales_tax">
-                                        <input type="hidden" name="sales_tax" value="0.00">
-                                        <p class="has-text-right"><strong>$ 0.00</strong></p><br>
+                                        <p class="has-text-right"><strong>$ {{ sales_tax }}</strong></p><br>
                                     </div>
                                     <div class="field" id="total_paid">
-                                        <input type="hidden" name="total_paid" value="{{ cart.get_total_price|floatformat:2 }}">
-                                            <p class="has-text-right"><strong>$ {{ cart.get_total_price|floatformat:2 }}</strong></strong></p>
+                                        <p class="has-text-right"><strong>$ {{ total_paid }}</strong></p>
                                     </div>
                                 </form>
                             </div>
@@ -152,7 +151,7 @@
             }
             console.log(formdata)
             return actions.order.capture().then(function(details){
-                return fetch('/orders/payment/', {
+                return fetch('/orders/checkout/', {
                     method: 'POST',
                     headers: {
                         'Content-Type': 'application/json',

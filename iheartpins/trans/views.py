@@ -10,6 +10,7 @@ from cart.cart import Cart
 from .models import Listing, ListingImage
 from main.models import Item, PinventoryContent, Pinventory
 from main.serializers import ListingSerializer
+from orders.models import Order, OrderItem
 
 
 def search_listings(request):
@@ -29,14 +30,38 @@ def search_listings(request):
             return redirect('trans:search_available')
     else:
         form = AddToCartForm()
-    return render(request,'trans/search_available.html', {
+
+    context = {
         'form': form,
         'query': query,
         'qitem': qitem,
         'v_content': v_content,
         'listings': s_listings,
-    })
+    }
+    return render(request,'trans/search_available.html', context)
 
+@login_required
+def seller_orders(request):
+    user = request.user
+    solditems = sorted(OrderItem.objects.filter(seller_id=user.id), key=lambda x: x.id, reverse=True)
+    orders = Order.objects.filter(items__in=solditems).order_by('-date_created').distinct()
+    listings = Listing.objects.filter(order_item__in=solditems).prefetch_related('order_item')
+    # listings = [sorted(Listing.objects.filter(order_item__in=solditems), key=lambda x: x.order_item.get(listing=solditem.listing.id), reverse=True) for solditem in solditems]
+    images = ListingImage.objects.filter(listing__in=listings)
+
+
+    # v_content = PinventoryContent.objects.filter(id__in=solditems.listing_id.pinventory_content)
+    # listings = Listing.objects.filter(pinventory_content__in=v_content, is_inactive=False)
+    s_listings = ListingSerializer(listings, many=True, read_only=True).data
+
+    context = {
+        'orders': orders,
+        'solditems': solditems,
+        # 'v_content': v_content,
+        'listings': s_listings,
+        'images': images,
+    }
+    return render(request, 'trans/orders.html', context)
 
 
 

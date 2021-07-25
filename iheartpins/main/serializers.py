@@ -80,6 +80,7 @@ class ListingSerializer(serializers.ModelSerializer):
             'date_listing_created',
             'is_inactive',
             'image',
+            'order_item',
         ]
         depth = 6
 

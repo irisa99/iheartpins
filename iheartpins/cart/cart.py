@@ -63,22 +63,5 @@ class Cart(object):
         for i in self.cart.keys():
             self.cart[str(i)]['listing'] = Listing.objects.get(pk=i)
 
-            return sum([cart_item['total_price'] for cart_item in self.cart.values()])
-
-
-
-
-            # return [cart_item for cart_item in self.cart.values()]
-
-
-            # listings = Listing.objects.filter(pk=i)
-            # s_listings = ListingSerializer(listings, many=True)
-            # for s_listing in s_listings.data:
-            #     self.cart[str(i)]['listing'] = s_listing
-            #     return s_listing['price']
-
-                # return cart_item['total_price']
-
-
-            # return sum(cart_item[i]['quantity'] * float(cart_item[i]['listing']['price']))
+        return sum(cart_item['quantity'] * cart_item['listing'].price for cart_item in self.cart.values())
 
