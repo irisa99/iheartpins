@@ -34,7 +34,6 @@ USPS_API_KEY = '378IHEAR6885'
 # Application definition
 
 INSTALLED_APPS = [
-    'jet',
     'django.contrib.admin',
     'django.contrib.auth',
     'django.contrib.contenttypes',

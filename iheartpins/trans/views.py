@@ -43,7 +43,7 @@ def search_listings(request):
 @login_required
 def seller_orders(request):
     user = request.user
-    solditems = sorted(OrderItem.objects.filter(seller_id=user.id), key=lambda x: x.id, reverse=True)
+    solditems = sorted(OrderItem.objects.filter(seller_id=user.id).prefetch_related('order','listing'), key=lambda x: x.id, reverse=True)
     orders = Order.objects.filter(items__in=solditems).order_by('-date_created').distinct()
     listings = Listing.objects.filter(order_item__in=solditems).prefetch_related('order_item')
     # listings = [sorted(Listing.objects.filter(order_item__in=solditems), key=lambda x: x.order_item.get(listing=solditem.listing.id), reverse=True) for solditem in solditems]

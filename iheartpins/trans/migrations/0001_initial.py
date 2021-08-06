@@ -32,7 +32,7 @@ class Migration(migrations.Migration):
             name='ListingImage',
             fields=[
                 ('id', models.BigAutoField(auto_created=True, primary_key=True, serialize=False, verbose_name='ID')),
-                ('image', models.ImageField(null=True, upload_to='None')),
+                ('image', models.ImageField(null=True, upload_to='images')),
                 ('is_primary', models.BooleanField(default=True)),
                 ('date_image_added', models.DateTimeField(auto_now_add=True, verbose_name='date added')),
                 ('listing', models.ForeignKey(on_delete=django.db.models.deletion.CASCADE, related_name='image', to='trans.listing')),

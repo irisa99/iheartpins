@@ -25,6 +25,8 @@ class Cart(object):
         for cart_item in self.cart.values():
             cart_item['total_price'] = float(cart_item['listing']['price']) * cart_item['quantity']
             cart_item['total'] = json.dumps(cart_item['total_price'])
+            cart_item['v_item'] = json.dumps(cart_item['listing']['pinventory_content'])
+            cart_item['seller'] = json.dumps(cart_item['listing']['pinventory_content']['pinventory']['owner'])
 
             yield cart_item
 

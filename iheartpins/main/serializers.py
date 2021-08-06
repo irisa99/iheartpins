@@ -1,6 +1,7 @@
 from rest_framework import serializers
 from django.forms.models import model_to_dict
 from trans.models import Listing, ListingImage
+from orders.models import Order, OrderItem
 from main.models import ItemImage, Item, PinventoryContent
 
 
@@ -48,6 +49,22 @@ class PinventoryContentSerializer(serializers.ModelSerializer):
         depth = 3
 
 
+class OrderSerializer(serializers.ModelSerializer):
+    date_created = serializers.DateTimeField(format='mm-dd-YYYY h:i')
+    class Meta:
+        model = Order
+        fields = '__all__'
+        depth = 2
+
+
+class OrderItemSerializer(serializers.ModelSerializer):
+    order = OrderSerializer(read_only=True)
+    class Meta:
+        model = OrderItem
+        fields = '__all__'
+        depth = 2
+
+
 class ListingImageSerializer(serializers.ModelSerializer):
     image_url = serializers.SerializerMethodField('get_image_url')
     class Meta:
@@ -66,6 +83,7 @@ class ListingImageSerializer(serializers.ModelSerializer):
 class ListingSerializer(serializers.ModelSerializer):
     image = serializers.SerializerMethodField('get_image')
     pinventory_content = PinventoryContentSerializer(read_only=True)
+    order_item = OrderItemSerializer(many=True, read_only=True)
     class Meta:
         model = Listing
         fields = [

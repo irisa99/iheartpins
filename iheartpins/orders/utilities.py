@@ -9,7 +9,7 @@ User = get_user_model()
 
 
 
-def checkout(request, user, email, ship_to, cart_total, shipping, sales_tax, total_paid, gateway, payment_intent):
+def checkout(request, user, cart_total, shipping, sales_tax, total_paid, gateway, payment_intent):
     cart = Cart(request)
     order = Order.objects.create(
         buyer=user,

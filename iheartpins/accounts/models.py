@@ -53,7 +53,7 @@ class User(AbstractBaseUser):
     bal_trade_credits = models.IntegerField(blank=True, null=True)
     current_rating = models.DecimalField(max_digits=10, decimal_places=2, blank=True, null=True)
     user_notes = models.TextField(blank=True, null=True)
-    profile_pic = models.ImageField(upload_to='None', blank=True, null=True)
+    profile_pic = models.ImageField(upload_to='images', blank=True, null=True)
 
     objects = UserManager()
 

@@ -34,7 +34,7 @@ class Migration(migrations.Migration):
                 ('bal_trade_credits', models.IntegerField(blank=True, null=True)),
                 ('current_rating', models.DecimalField(blank=True, decimal_places=2, max_digits=10, null=True)),
                 ('user_notes', models.TextField(blank=True, null=True)),
-                ('profile_pic', models.ImageField(blank=True, null=True, upload_to='None')),
+                ('profile_pic', models.ImageField(blank=True, null=True, upload_to='images')),
             ],
             options={
                 'abstract': False,

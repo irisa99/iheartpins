@@ -27,41 +27,43 @@
                 </tr>
             </thead>
           <tbody>
-
-                {% for listing in listings %}
-                    {% for order_item in listing.order_item %}
+                {% for solditem in solditems %}
+                        {{ solditem.order }}
                       <tr>
-                          <td>{{ order_item.order.id }}<br>{{ solditem.order.id }}</td>
+                          <td>{{ solditem.listing.pinventory_content }}</td>
                             <td>
-                                {% if listing.image %}
+                                {% if solditem.listing.image %}
                                     <figure class="image is-square">
-                                        <img src="{{ listing.image.image }}">
+                                        <img src="{{ solditem.listing.image.image }}">
                                     </figure>
                                 {% else %}
                                     <figure class="image is-square">
-                                        <img src="{{ listing.pinventory_content.item.image.image }}">
+                                        <img src="{{ solditem.listing.pinventory_content.item.image.image }}">
                                     </figure>
                                 {% endif %}
                             </td>
-                            <td>$ {{ listing.price }}</td>
-                            <td>{{ order_item.quantity }}</td>
+                            <td>$ {{ solditem.listing }}</td>
+                            <td>
+                                {{ solditem.order }}
+                            </td>
                             <td>
                                 {% if listing.descrip %}
-                                <a href="#">{{ listing.descrip }}</a>
+                                <a href="#">{{ listing.pinventory_content.item.name }}<br>{{ listing.descrip }}</a>
+                                {% else %}
+                                <a href="#">{{ listing.pinventory_content.item.name }}</a>
                                 {% endif %}
                             </td>
-                            <td>{{ order_item.order.date_created|date:"F j, Y g:i a" }}</td>
-                            <td>{{ order_item.order.buyer.username }}</td>
+                            <td>{{ listing.order_item.0.order.date_created }}</td>
+                            <td>{{ listing.order_item.0.order.buyer.username }}</td>
                             <td>
-                                {{ order_item.order.buyer_firstname }} {{ order_item.order.buyer_lastname }}<br>
-                                {{ order_item.order.ship_to.street1 }}<br>
-                                {{ order_item.order.ship_to.city }}, {{ order_item.order.ship_to.state }} {{ order_item.order.ship_to.postalcode }}
+                                {{ listing.order_item.0.order.buyer_firstname }} {{ listing.order_item.0.order.buyer_lastname }}<br>
+                                {{ listing.order_item.0.order.ship_to.street1 }}<br>
+                                {{ listing.order_item.0.order.ship_to.city }}, {{ listing.order_item.0.order.ship_to.state }} {{ listing.order_item.0.order.ship_to.postalcode }}
                             </td>
-                            <td>{{ order_item.order.status }}</td>
+                            <td>{{ listing.order_item.0.order.status }}</td>
                             <td></td>
                     </tr>
                 {% endfor %}
-            {% endfor %}
           </tbody>
 
         </table>

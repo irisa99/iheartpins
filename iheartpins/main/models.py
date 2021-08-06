@@ -77,7 +77,7 @@ class PinSetContent(models.Model):
 
 
 class ItemImage(models.Model):
-    image = models.ImageField(upload_to=None, height_field=None, width_field=None, max_length=100, null=True)
+    image = models.ImageField(upload_to='images', height_field=None, width_field=None, max_length=100, null=True)
     item = models.ForeignKey(Item, related_name='images', on_delete=models.CASCADE)
     is_primary = models.BooleanField(default=True)
     date_image_added = models.DateTimeField(verbose_name='date added', auto_now_add=True)

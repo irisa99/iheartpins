@@ -95,21 +95,10 @@
                                 <p><strong>Total</strong></p><br>
                             </div>
                             <div class="column">
-                                <form method="post" action="." id="checkout-form">
-                                    {% csrf_token %}
-                                    <div class="field" id="cart_total">
-                                        <p class="has-text-right"><strong>$ {{ cart.get_total_price|floatformat:2 }}</strong></p><br>
-                                    </div>
-                                    <div class="field" id="shipping">
-                                        <p class="has-text-right"><strong>$ {{ shipping }}</strong></p><br>
-                                    </div>
-                                    <div class="field" id="sales_tax">
-                                        <p class="has-text-right"><strong>$ {{ sales_tax }}</strong></p><br>
-                                    </div>
-                                    <div class="field" id="total_paid">
-                                        <p class="has-text-right"><strong>$ {{ total_paid }}</strong></p>
-                                    </div>
-                                </form>
+                                <p class="has-text-right"><strong>$ {{ cart.get_total_price|floatformat:2 }}</strong></p><br>
+                                <p class="has-text-right"><strong>$ {{ shipping|floatformat:2 }}</strong></p><br>
+                                <p class="has-text-right"><strong>$ {{ sales_tax|floatformat:2 }}</strong></p><br>
+                                <p class="has-text-right"><strong>$ {{ total_paid|floatformat:2 }}</strong></p>
                             </div>
                         </div>
                     </div>
