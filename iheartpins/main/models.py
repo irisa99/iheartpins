@@ -48,6 +48,7 @@ class Item(models.Model):
     slug = models.SlugField(max_length=255, unique=True)
     date_item_added = models.DateTimeField(verbose_name='date added', auto_now_add=True)
     submitted_by = models.ForeignKey(User, on_delete=models.DO_NOTHING)
+    needs_new_pic = models.BooleanField(blank=True, null=True, default=False)
 
 
     def __str__(self):

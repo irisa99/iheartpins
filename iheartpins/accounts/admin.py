@@ -1,10 +1,19 @@
 from django.contrib import admin
-from django.contrib.auth import get_user_model
+# from django.contrib.auth.models import User
 from django.contrib.auth.models import Group
 from django.contrib.auth.admin import UserAdmin as BaseUserAdmin
-from .models import Address, Person, TradeCredits
+from .models import Address, Person, TradeCredits, Profile,User
 
-User = get_user_model()
+
+class ProfileAdmin(admin.ModelAdmin):
+    list_display = (
+        'user',
+        'is_verified',
+        'created_at',
+    )
+
+admin.site.register(Profile, ProfileAdmin)
+
 
 class UserAdmin(BaseUserAdmin):
     list_display = (

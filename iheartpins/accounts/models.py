@@ -1,6 +1,7 @@
 from django.db import models
-from django.contrib.auth.models import AbstractBaseUser, BaseUserManager
+from django.contrib.auth.models import AbstractBaseUser, BaseUserManager,AbstractUser
 from django.utils import timezone
+
 
 class UserManager(BaseUserManager):
     def create_user(self, email, username, password=None):
@@ -31,7 +32,7 @@ class UserManager(BaseUserManager):
         return user
 
 
-class User(AbstractBaseUser):
+class User(AbstractUser):
     email = models.EmailField(max_length=254, null=False, unique=True)
     username = models.CharField(max_length=30, null=False, unique=True)
     EMAIL_FIELD = 'email'
@@ -80,6 +81,14 @@ class Person(models.Model):
     def __str__(self):
         return self.fullname()
 
+class Profile(models.Model):
+    user = models.OneToOneField(User, on_delete=models.CASCADE)
+    auth_token = models.CharField(max_length=100)
+    is_verified =models.BooleanField(default=False)
+    created_at = models.DateTimeField(auto_now_add=True)
+
+    def __str__(self):
+        return self.user.username
 
 
 class Address(models.Model):

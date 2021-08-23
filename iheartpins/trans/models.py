@@ -30,17 +30,32 @@ class ListingImage(models.Model):
     date_image_added = models.DateTimeField(verbose_name='date added', auto_now_add=True)
 
 
-class TradeOffer(models.Model):
-    sender = models.ForeignKey(User, related_name='sent_offers', on_delete=models.DO_NOTHING)
-    receiver = models.ForeignKey(User, related_name='received_offers', on_delete=models.DO_NOTHING)
+class MessageType(models.Model):
+    sender = models.ForeignKey(User, related_name='sent_messages', on_delete=models.DO_NOTHING)
+    receiver = models.ForeignKey(User, related_name='received_messages', on_delete=models.DO_NOTHING)
+    date_sent = models.DateTimeField(auto_now_add=True)
+    is_received = models.BooleanField(default=False)
+    date_received = models.DateTimeField(blank=True, null=True)
+
+
+class Message(MessageType):
+    messagetype_ptr = models.OneToOneField(MessageType, on_delete=models.CASCADE, parent_link=True, primary_key=True)
+    # sender = models.ForeignKey(User, related_name='sent_messages', on_delete=models.DO_NOTHING)
+    # receiver = models.ForeignKey(User, related_name='received_messages',on_delete=models.DO_NOTHING)
+    message_text = models.TextField()
+
+
+
+
+class TradeOffer(MessageType):
+    messagetype_ptr = models.OneToOneField(MessageType, on_delete=models.CASCADE, parent_link=True, primary_key=True)
+    # sender = models.ForeignKey(User, related_name='sent_offers', on_delete=models.DO_NOTHING)
+    # receiver = models.ForeignKey(User, related_name='received_offers', on_delete=models.DO_NOTHING)
     offer_item_receive = models.ForeignKey(Listing, related_name='item_offered_receiver', on_delete=models.DO_NOTHING)
     offer_item_send1 = models.ForeignKey(Listing, related_name='item_offered_sender1', blank=True, null=True, on_delete=models.DO_NOTHING)
     offer_item_send2 = models.ForeignKey(Listing, related_name='item_offered_sender2', blank=True, null=True, on_delete=models.DO_NOTHING)
     offer_item_send3 = models.ForeignKey(Listing, related_name='item_offered_sender3', blank=True, null=True, on_delete=models.DO_NOTHING)
-    date_offer_sent = models.DateTimeField(auto_now_add=True)
-    date_offer_received = models.DateTimeField(blank=True, null=True)
     date_offer_replied = models.DateTimeField(blank=True, null=True)
-    is_received = models.BooleanField(default=False)
     is_accepted = models.BooleanField(blank=True, null=True, default=False)
     is_counteroffer = models.BooleanField(blank=True, null=True, default=False)
 

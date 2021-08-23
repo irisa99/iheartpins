@@ -1,13 +1,46 @@
-{% extends "main/base.html" %}
-{% load crispy_forms_tags %}
-{% block title %}Log In | {% endblock title %}
+{% extends 'accounts/base.html' %}
+{% load static %}
 {% block content %}
-<form method="post" class="from-group">
-    {% csrf_token %}
-    {{ form|crispy }}
-    <div class="form-group">
-         <p>Don't have an account yet? <a href="/register/">Create one today!</a></p>
-        <button class="btn btn-outline-info" type="submit">Sign In</button>
+
+    <div class="main-wrapper">
+        <div class="main-container">
+            <img src="{% static 'img/logo.png'%}" alt="logo">
+            <h1>iheartpins</h1>
+            <p>Login here to join the online community of pins</p>
+            <div class="Form-Login">
+                {% if messages %}
+                    {% for msg in messages%}
+                    <div class="message-success">
+                        {{msg}}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+                <form method="POST">
+                    {% csrf_token %}
+                   
+                   <div class='email'>
+                        <label style="font-weight: bolder;">Email</label><br>
+                        <input type="email" name="email" class="effect-1" placeholder="Enter Email" id="email"  required />
+                        <span class="focus-border"></span>
+                    </div>
+                    <div class='email'>
+                        <label style="font-weight: bolder;">Password</label><br>
+                        <input type="password" name="password"  class="effect-1" placeholder="Password" required />
+                        <span class="focus-border"></span>
+                    </div>
+                    <small><a href="#" class="link"> Forget password?</a></small>
+                    <div>
+                        <button type="submit" name="login" class='Button-Login' >Login</button>
+                    </div>
+                </form>
+            </div>
+            <p>Don't have an account yet? <a href="{% url 'register'%}" class="link">Create one today!</a></p>
+        </div>
+
+        <div class="login-text">
+            <h1>Login to iheartpins</h1>
+            <p>An Online Community for People who &#9829; Pins</p>
+        </div>
     </div>
-</form>
-{% endblock content %}
+{% endblock %}
+

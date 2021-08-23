@@ -88,13 +88,26 @@ WSGI_APPLICATION = 'iheartpins.wsgi.application'
 # Database
 # https://docs.djangoproject.com/en/3.2/ref/settings/#databases
 
-DATABASES = {
-    'default': {
-        'ENGINE': 'django.db.backends.sqlite3',
-        'NAME': BASE_DIR / 'db.sqlite3',
-    }
-}
+DATABASES = 2
 
+if DEBUG and (DATABASES == 2):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.sqlite3',
+            'NAME': BASE_DIR / 'db.sqlite3',
+        }
+    }
+elif DEBUG and (DATABASES == 1):
+    DATABASES = {
+        'default': {
+            'ENGINE': 'django.db.backends.mysql',
+            'NAME': 'DB_iheartpins',
+            'USER':'kim',
+            'PASSWORD':'kim@123',
+            'HOST':'127.0.0.1',
+            'PORT':'3306',
+        }
+    }
 
 # Password validation
 # https://docs.djangoproject.com/en/3.2/ref/settings/#auth-password-validators
@@ -144,7 +157,7 @@ STATICFILES_DIRS = [
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
 
-LOGIN_URL = 'login'
+LOGIN_URL = 'accounts/login'
 LOGIN_REDIRECT_URL = 'main:pinventory'
 LOGOUT_REDIRECT_URL = '/'
 
@@ -154,3 +167,10 @@ CART_SESSION_ID = 'cart'
 MEDIA_URL = '/media/'
 MEDIA_ROOT = BASE_DIR / 'media/'
 
+
+EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+EMAIL_USE_TLS = True
+EMAIL_PORT = 587
+EMAIL_HOST_USER = 'freefake476@gmail.com'
+EMAIL_HOST_PASSWORD = 'freelancer@5'

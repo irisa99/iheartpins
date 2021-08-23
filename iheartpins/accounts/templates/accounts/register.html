@@ -1,24 +1,52 @@
-{% extends 'main/base.html' %}
-{% load crispy_forms_tags %}
-{% block title %}Register New User | {% endblock title %}
+{% extends 'accounts/base.html' %}
+{% load static %}
 {% block content %}
-    <div class="content-section">
-        <form method="POST">
-            {% csrf_token %}
-            <fieldset class="form-group" >
-                <legend class="border-bottom mb-4">Join our Pin Community and start trading today!</legend>
-                {{ form|crispy }}
-            </fieldset>
-            <div class="form-group">
-                <button class="btn btn-outline-info" type="submit">Sign Up</button>
+    <div class="main-wrapper">
+        <div class="main-container">
+            <img src="{% static 'img/logo.png'%}" alt="logo">
+            <h1>iheartpins</h1>
+            <p>Register here to join the online community of pins</p>
+            
+                {% if messages %}
+                    {% for msg in messages%}
+                    <div class="message">
+                        {{msg}}
+                    </div>
+                    {% endfor %}
+                {% endif %}
+            <div class="Form-Login">
+                <form method="POST">
+                    {% csrf_token %}                   
+                    <div class='email'>
+                        <label style="font-weight: bolder;">Username</label><br>
+                        <input type="text" name="username" class="effect-1" placeholder="Enter Username"  required />
+                        <span class="focus-border"></span>
+                    </div>
+                   <div class='email'>
+                        <label style="font-weight: bolder;">Email</label><br>
+                        <input type="email" name="email" class="effect-1" placeholder="Enter Email" required />
+                        <span class="focus-border"></span>
+                    </div>
+                    <div class='email'>
+                        <label style="font-weight: bolder;">Password</label><br>
+                        <input type="password" name="password" class="effect-1" placeholder="Password" required />
+                        <span class="focus-border"></span>
+                    </div>
+                    <div>
+                        <button type="submit" name="register" class='Button-Login' >Register</button>
+                    </div>
+                </form>
             </div>
-        </form>
-        <div class="border-top pt-3">
-            <small class="text-muted">
-                Already have an account? <a class="ml-2" href="/login/">Sign In</a>
-            </small>
+            <p> Already have an account? <a href="{% url 'login'%}" class="link">Sign In</a></p>
+        </div>
 
+        <div class="login-text">
+            <h1>Register to iheartpins</h1>
+            <p>An Online Community for People who &#9829; Pins</p>
         </div>
     </div>
-{% endblock content %}
+
+{% endblock%}
+
+
 
