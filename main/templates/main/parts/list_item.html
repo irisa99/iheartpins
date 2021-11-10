@@ -1,0 +1,22 @@
+{% load static %}
+
+<!-- <div class="column is-2 item-list-item">
+    <div class="box">
+        <figure class="image is-square mb-4">
+            <img src="{{ item_image.image.url }}">
+        </figure>
+            <h2 class="subtitle is-6">{{ item_image.item }}</h2>
+                <a href="{% url 'main:item' item_image.item.slug %}" class="button is-dark">View Details</a>
+    </div>
+</div> -->
+
+<div class="row">
+    <div class="col-3">
+        <div class="pins-card">
+            <img src="{{ item_image.image.url }}" alt="" class="img-fluid">
+            <p> {{ item_image.item }}</p>
+            <a href="{% url 'main:item' item_image.item.slug %}" class="btn btn-warning"> Details</a>
+        </div>
+        
+    </div>
+</div>

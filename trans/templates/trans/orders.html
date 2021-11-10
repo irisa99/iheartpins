@@ -1,0 +1,79 @@
+{% extends 'main/base.html' %}
+
+{% block title %}My Orders | {% endblock %}
+
+{% block content %}
+<div class="section">
+  <div class="columns is-multiline mb-6">
+    <div class="column is-12 mb-6">
+      <h2 class="is-size-3">Sold Items</h2>
+    </div>
+  </div>
+  <div>
+      {% if orders %}
+        <table class="table is-fullwidth">
+            <thead>
+                <tr>
+                    <th>Order No.</th>
+                    <th>Item</th>
+                    <th>Price</th>
+                    <th>Quantity</th>
+                    <th>Description</th>
+                    <th>Sale Date</th>
+                    <th>Sold To</th>
+                    <th>Name & Address</th>
+                    <th>Status</th>
+                    <th>Ship Item</th>
+                </tr>
+            </thead>
+          <tbody>
+                {% for solditem in solditems %}
+                        {{ solditem.order }}
+                      <tr>
+                          <td>{{ solditem.listing.pinventory_content }}</td>
+                            <td>
+                                {% if solditem.listing.image %}
+                                    <figure class="image is-square">
+                                        <img src="{{ solditem.listing.image.image }}">
+                                    </figure>
+                                {% else %}
+                                    <figure class="image is-square">
+                                        <img src="{{ solditem.listing.pinventory_content.item.image.image }}">
+                                    </figure>
+                                {% endif %}
+                            </td>
+                            <td>$ {{ solditem.listing }}</td>
+                            <td>
+                                {{ solditem.order }}
+                            </td>
+                            <td>
+                                {% if listing.descrip %}
+                                <a href="#">{{ listing.pinventory_content.item.name }}<br>{{ listing.descrip }}</a>
+                                {% else %}
+                                <a href="#">{{ listing.pinventory_content.item.name }}</a>
+                                {% endif %}
+                            </td>
+                            <td>{{ listing.order_item.0.order.date_created }}</td>
+                            <td>{{ listing.order_item.0.order.buyer.username }}</td>
+                            <td>
+                                {{ listing.order_item.0.order.buyer_firstname }} {{ listing.order_item.0.order.buyer_lastname }}<br>
+                                {{ listing.order_item.0.order.ship_to.street1 }}<br>
+                                {{ listing.order_item.0.order.ship_to.city }}, {{ listing.order_item.0.order.ship_to.state }} {{ listing.order_item.0.order.ship_to.postalcode }}
+                            </td>
+                            <td>{{ listing.order_item.0.order.status }}</td>
+                            <td></td>
+                    </tr>
+                {% endfor %}
+          </tbody>
+
+        </table>
+      {% else %}
+      <p>No available items found.</p>
+      {% endif %}
+  </div>
+</div>
+{% endblock %}
+
+{% block scripts %}
+
+{% endblock %}

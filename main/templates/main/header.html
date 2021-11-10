@@ -1,0 +1,133 @@
+{% load static %}
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="shortcut icon" href="img/logo.png" type="image/x-icon">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/animate.css/4.1.1/animate.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="{% static 'css/jquery.fancybox.min.css' %}">
+    <link rel="stylesheet" href="{% static 'css/style.css' %}">
+    <title>Home Page</title>
+</head>
+
+<body>
+    <header>
+        <div class="nav-links">
+            
+            <ul class="menus">
+                <li>
+                    <a href="/">Home</a>
+                </li>
+                <li>
+                    <a href="#">About</a>
+                </li>
+                <li>
+                    <a href="#">Blogs</a>
+                </li>
+                <li>
+                    <a href="{% url 'main:contact' %}">Contact</a>
+                </li>
+            </ul>
+            <ul>
+                <li>
+                   <form method="get" action="{% url 'main:search' %}" class="header-search">
+                       <input type="text" name="query" id="" placeholder="Search Pins">
+                       <button><i class="fas fa-search"></i></button>
+                    </form>
+                </li>
+            </ul>
+            <ul class="header-btn">
+                {% if user.is_authenticated %}
+                <li>
+                    <a href="{% url 'account' %}">Account</a>
+                </li>
+                <li>
+                    <a href="{% url 'logout' %}">Logout</a>
+                </li>
+                {% else %}
+                <li>
+                    <a href="{% url 'login' %}">Login</a>
+                </li>
+                <li>
+                    <a href="{% url 'register' %}">Register</a>
+                </li>
+                {% endif %}
+            </ul>            
+        </div>
+        <div class="hamburger">
+            <div class="line1"></div>
+            <div class="line2"></div>
+            <div class="line3"></div>
+        </div>
+    </header>
+    {% block main_content %}
+    {% endblock main_content %}
+    <script>
+        const navSlide = () =>{
+            const burger = document.querySelector('.hamburger');
+            const nav = document.querySelector('.nav-links');
+            const navLinks = document.querySelectorAll('.menus li');
+
+            burger.addEventListener('click', () => {
+
+                nav.classList.toggle('nav-active');
+
+                navLinks.forEach((link,index)=>{
+                if (link.style.animation) {
+                    link.style.animation = '';
+                } else {
+                    link.style.animation = `navLinkFade 1.5s ease forwards ${index / 7 + 0.3}s`;
+                }
+            });
+            burger.classList.toggle('toggle');
+            });
+        }
+        navSlide();
+    </script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/bootstrap/5.1.0/js/bootstrap.min.js"></script>
+    <script src="{% static 'js/jquery.js' %}"></script>
+    <script src="{% static 'js/jquery.fancybox.min.js' %}"></script>
+    <script src="{% static 'js/slick.min.js' %}"></script>
+    <script>
+        $('.slick-slides').slick({
+            slidesToShow: 5,
+            slidesToScroll: 1,
+            autoplay: true,
+            autoplaySpeed: 2000,
+            speed:800,
+            prevArrow:'<i class="fas fa-chevron-left    left-arrow">',
+            nextArrow:'<i class="fas fa-chevron-right   right-arrow">',
+            responsive: [
+                {
+                breakpoint: 768,
+                settings: {
+                    slidesToShow: 3,
+                    slidesToScroll: 3,
+                    // infinite: true,
+                }
+                },
+                {
+                breakpoint: 600,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+                },
+                {
+                breakpoint: 480,
+                settings: {
+                    slidesToShow: 2,
+                    slidesToScroll: 2
+                }
+                }
+            ]
+        });
+    </script>
+    <script src="{% static 'js/product.js' %}"></script>
+</body>
+</html>

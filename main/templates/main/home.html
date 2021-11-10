@@ -1,0 +1,179 @@
+{% extends "main/base.html" %}
+{% load static %}
+
+<!-- <section class="hero-section">
+    <div class="content-wrapper">
+        <h1 class="animate__animated animate__fadeInDown">Welcome to iheartpins</h1>
+        <h3 class="animate__animated animate__fadeInUp">An Online Community for People Who ❤️ Pins</h3>
+        <form method="get" action="{% url 'main:search' %}" class="search-box animate__animated animate__fadeInUp">
+            <div class="search-inp">
+                <input type="text"  placeholder="Search Pins..." name="query">
+            </div>
+            <button class="search-btn"><i class="fas fa-search"></i>Search</button>  
+        </form>
+    </div>
+</section> -->
+{% block content %}
+<section class="hero-section">
+    <div class="logo">
+        <a href="/"><img src="{% static 'img/logo.png' %}" alt=""></a>
+    </div>
+    <div class="content-wrapper">
+        <h1 class="animate__animated animate__fadeInDown">Welcome to iheartpins</h1>
+        <h3 class="animate__animated animate__fadeInUp">An Online Community for People Who ❤️ Pins</h3>
+        <form method="get" action="{% url 'main:search' %}" class="search-box animate__animated animate__fadeInUp">
+            <div class="search-inp">
+                <input type="text" placeholder="Search Pins..." name="query">
+            </div>
+            <button class="search-btn"><i class="fas fa-search"></i><span class="d-none d-md-inline-block">Search</span></button>
+        </form>
+    </div>
+</section>
+
+<!-- New Releases -->
+<section class="container-xxl px-3 py-3 py-lg-5 px-xl-4">
+    <h1 class="fw-bold text-uppercase text-center">New Releases</h1>
+    <div class="slider ">
+        <div class="pt-4 pt-md-5 ">
+            <div class="slick-slides">
+                <div class="pins-card">
+                    <img src="{% static 'img/demo1.jpg' %}" alt="" class="img-fluid">
+                    <p> Dummy Pin</p>
+                </div>
+                <div class="pins-card">
+                    <img src="{% static 'img/demo2.jpg' %}" alt="" class="img-fluid">
+                    <p> Dummy Pin</p>
+                </div>
+                <div class="pins-card">
+                    <img src="{% static 'img/demo3.jpg' %}" alt="" class="img-fluid">
+                    <p> Dummy Pin</p>
+                </div>
+                <div class="pins-card">
+                    <img src="{% static 'img/demo4.jpg' %}" alt="" class="img-fluid">
+                    <p> Dummy Pin</p>
+                </div>
+                <div class="pins-card">
+                    <img src="{% static 'img/demo5.jpg' %}" alt="" class="img-fluid">
+                    <p> Dummy Pin</p>
+                </div>
+                <div class="pins-card">
+                    <img src="{% static 'img/demo6.jpg' %}" alt="" class="img-fluid">
+                    <p> Dummy Pin</p>
+                </div>
+                <div class="pins-card">
+                    <img src="{% static 'img/demo7.jpg' %}" alt="" class="img-fluid">
+                    <p> Dummy Pin</p>
+                </div>
+                <div class="pins-card">
+                    <img src="{% static 'img/demo8.jpg' %}" alt="" class="img-fluid">
+                    <p> Dummy Pin</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<hr>
+<!-- Most Popular -->
+<section class="container-xxl px-3 py-3 py-lg-5 px-xl-4">
+    <h1 class="fw-bold text-uppercase text-center">Most Popular</h1>
+    <div class="slider">
+        <div class="pt-xl-5 pt-4">
+            <div class="slick-slides">
+                <div class="pins-card">
+                    <img src="{% static 'img/demo1.jpg' %}" alt="" class="img-fluid">
+                    <p> Dummy Pin</p>
+                </div>
+                <div class="pins-card">
+                    <img src="{% static 'img/demo3.jpg' %}" alt="" class="img-fluid">
+                    <p> Dummy Pin</p>
+                </div>
+                <div class="pins-card">
+                    <img src="{% static 'img/demo5.jpg' %}" alt="" class="img-fluid">
+                    <p> Dummy Pin</p>
+                </div>
+                <div class="pins-card">
+                    <img src="{% static 'img/demo7.jpg' %}" alt="" class="img-fluid">
+                    <p> Dummy Pin</p>
+                </div>
+                <div class="pins-card">
+                    <img src="{% static 'img/demo9.jpg' %}" alt="" class="img-fluid">
+                    <p> Dummy Pin</p>
+                </div>
+                <div class="pins-card">
+                    <img src="{% static 'img/demo11.jpg' %}" alt="" class="img-fluid">
+                    <p> Dummy Pin</p>
+                </div>
+                <div class="pins-card">
+                    <img src="{% static 'img/demo13.jpg' %}" alt="" class="img-fluid">
+                    <p> Dummy Pin</p>
+                </div>
+                <div class="pins-card">
+                    <img src="{% static 'img/demo2.jpg' %}" alt="" class="img-fluid">
+                    <p> Dummy Pin</p>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<hr>
+<!-- Most Wanted -->
+<section class="container-xxl px-3 py-3 py-lg-5 px-xl-4">
+    <h1 class="fw-bold text-uppercase text-center">Most Wanted</h1>
+    <div class="slider ">
+        <div class="container-xxl pt-4 pt-xl-5">
+            <div class="row slick-slides">
+                <div class="col-sm-2">
+                    <div class="pins-card">
+                        <img src="{% static 'img/demo9.jpg' %}" alt="" class="img-fluid">
+                        <p> Dummy Pin</p>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="pins-card">
+                        <img src="{% static 'img/demo10.jpg' %}" alt="" class="img-fluid">
+                        <p> Dummy Pin</p>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="pins-card">
+                        <img src="{% static 'img/demo11.jpg' %}" alt="" class="img-fluid">
+                        <p> Dummy Pin</p>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="pins-card">
+                        <img src="{% static 'img/demo12.jpg' %}" alt="" class="img-fluid">
+                        <p> Dummy Pin</p>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="pins-card">
+                        <img src="{% static 'img/demo2.jpg' %}" alt="" class="img-fluid">
+                        <p> Dummy Pin</p>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="pins-card">
+                        <img src="{% static 'img/demo1.jpg' %}" alt="" class="img-fluid">
+                        <p> Dummy Pin</p>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="pins-card">
+                        <img src="{% static 'img/demo4.jpg' %}" alt="" class="img-fluid">
+                        <p> Dummy Pin</p>
+                    </div>
+                </div>
+                <div class="col-sm-2">
+                    <div class="pins-card">
+                        <img src="{% static 'img/demo7.jpg' %}" alt="" class="img-fluid">
+                        <p> Dummy Pin</p>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</section>
+<hr>
+    
+{% endblock %}

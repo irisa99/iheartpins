@@ -1,0 +1,11 @@
+{% extends 'accounts/base.html' %}
+{% load static %}
+
+{% block content %}
+<div class="main-container">
+    <img src="{% static 'img/logo.png' %}" alt="logo" width="100">
+    <h1>Thanks for registration.</h1>
+    <p>Please check your email inbox to Verify your Account.</p>
+    <a href="/" style="text-align: center; margin-top: 20px;" class="link">Back to Homepage</a>
+</div>
+{% endblock %}

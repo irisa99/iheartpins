@@ -1,0 +1,153 @@
+{% extends "main/header.html" %}
+{% load static %}
+{% block title %}{{ item.name }} | {% endblock %}
+{% block main_content %}
+
+<main id="primary">
+    {% include "main/logo.html" %}
+    <div class="mt-5 product-wrapper">
+        <div class="row">
+            <!-- Description -->
+            <div class="mt-5 mt-lg-0 col-lg-5 position-relative">
+                <div class="product-meta">
+                    <li>63,829 sales</li>
+                    <li>
+                        <div class="ratings">
+                            <i class='fas fa-star'></i>
+                            <i class='fas fa-star'></i>
+                            <i class='fas fa-star'></i>
+                            <i class='fas fa-star'></i>
+                            <i class='fas fa-star'></i>
+                        </div>
+                    </li>
+                </div>
+                <div class='product-wishlist'>
+                    <a href="#">
+                        <i class='far fa-heart'></i>
+                    </a>
+                </div>
+                <h1 class="product-title">
+                    {{ item.name }}
+                </h1>
+                
+                <div class="product-note">
+                    <p>{{ item.descrip }}</p>
+                </div>
+
+                <table class='table product-table'>
+                    <tr>
+                        <td>Origin:</td>
+                        <td>Tokyo</td>
+
+                    </tr>
+                    <tr>
+                        <td>Source</td>
+                        <td>{{item.source}}</td>
+                    </tr>
+                    <tr>
+                        <td>SKU Number</td>
+                        <td>No</td>
+                    </tr>
+                    <tr>
+                        <td>Original Price</td>
+                        <td>Game Price</td>
+                    </tr>
+                    <tr>
+                        <td>Original Price</td>
+                        <td>Game Price</td>
+                    </tr>
+                    <tr>
+                        <td>Original Price</td>
+                        <td>Game Price</td>
+                    </tr>
+
+                </table>
+                <div class="form-group mt-5">
+                    <button type="button" class="btn btn-lg btn-primary col-12  rounded-pill">
+                         &nbsp; Add to Pinventory</button>
+                </div>
+                <div class="form-group mt-3">
+                    <button type="button" class="btn btn-lg btn-primary col-12  rounded-pill">
+                         &nbsp; Check Availablity</button>
+                </div>
+                <div class="form-group mt-3">
+                    <button type="button" class="btn btn-lg btn-primary col-12  rounded-pill">
+                         &nbsp; ISO</button>
+                </div>
+            </div>
+
+
+            <!-- Product Images -->
+            <div class="col-lg-7">
+                <div class="product-image-wrapper">
+                    <ul class="product-images-list">
+                        <li class='active'>
+                            <a data-fancybox='productImages' href="{{ main_item_primary_image.image.url }}">
+                                <img src="{{ main_item_primary_image.image.url }}" alt="Product Image">
+                            </a>
+                        </li>
+                        <li>
+                            <a data-fancybox='productImages' href="{% static './img/products/2.webp' %}" >
+                                <img src="{% static './img/products/2.webp' %}" alt="Product Image">
+                            </a>
+                        </li>
+                        <li>
+                            <a data-fancybox='productImages' href="{% static './img/products/3.webp' %}">
+                                <img src="{% static './img/products/3.webp' %}" alt="Product Image">
+                            </a>
+                        </li>
+                        <li>
+                            <a data-fancybox='productImages' href="{% static 'img/products/4.webp' %}">
+                                <img src="{% static 'img/products/4.webp' %}" alt="Product Image">
+                            </a>
+                        </li>
+                        <li>
+                            <a data-fancybox='productImages' href="{% static './img/products/5.webp' %}">
+                                <img src="{% static './img/products/5.webp' %}" alt="Product Image">
+                            </a>
+                        </li>
+                        <li>
+                            <a data-fancybox='productImages' href="{% static './img/products/6.webp' %}">
+                                <img src="{% static './img/products/6.webp' %}" alt="Product Image">
+                            </a>
+                        </li>
+                        <li>
+                            <a data-fancybox='productImages' href="{% static './img/products/7.webp' %}">
+                                <img src="{% static './img/products/7.webp' %}" alt="Product Image">
+                            </a>
+                        </li>
+                        <li>
+                            <a data-fancybox='productImages' href="{% static './img/products/8.webp' %}">
+                                <img src="{% static './img/products/8.webp' %}" alt="Product Image">
+                            </a>
+                        </li>
+                    </ul>
+                    <div class="product-image-main">
+
+                        <div class="product-img">
+                            {% if main_item_images %}
+                            <a data-fancybox="productImages" href="{{ main_item_primary_image.image.url }}">
+                                <img src="{{ main_item_primary_image.image.url }}" id='product_image'>
+                            </a>
+                            {% endif %}
+                            <div class="product-img-arrows">
+                                <a href="#" class='previous'>
+                                    <i class='fas fa-chevron-left'></i>
+                                </a>
+                                <a href="#" class='next'>
+                                    <i class='fas fa-chevron-right'></i>
+                                </a>
+                            </div>
+                        </div>
+                    </div>
+
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+
+</main>
+
+{% endblock main_content %}

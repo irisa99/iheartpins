@@ -1,0 +1,93 @@
+{% load static %}
+
+<!DOCTYPE html>
+
+<html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+
+        <title>{% block title %}{% endblock title %}iheartpins.app</title>
+
+        <link rel="shortcut icon" type="image/png" href="/media/images/I-love-heart-favicon-png.png">
+        <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bulma@0.9.1/css/bulma.min.css">
+        <link rel="stylesheet" href="{% static 'styles/main.css' %}">
+        <link rel="stylesheet" href="{% static 'styles/css/all.css' %}">
+        <link rel="stylesheet" href="{% static 'styles/css/brands.css' %}">
+
+    </head>
+    <body>
+        <div class="block">
+            <nav class="navbar is-primary">
+                <div class="nav-left">
+                    <div class="navbar-brand">
+                        <a href="/" class="navbar-item">
+                            <h1 class="title is-4">iheartpins</h1>
+
+                            <a role="button" class="navbar-burger" aria-label="menu" aria-expanded="false" data-target="main-navbar">
+                                <span aria-hidden="true"></span>
+                                <span aria-hidden="true"></span>
+                                <span aria-hidden="true"></span>
+                            </a>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="navbar-center">
+                    <div class="navbar-item">
+                        <form method="get" action="{% url 'main:search' %}">
+                            <div class="field has-addons is-expanded">
+                                <p class="control">
+                                    <input type="text" class="input" placeholder="Search the Pindex..." name="query">
+                                </p>
+                                <p class="control">
+                                    <button class="button is-dark">
+                                        <span class="icon is-small"><i class="fas fa-search" aria-hidden="true"></i></span>
+                                    </button>
+                                </p>
+                            </div>
+                        </form>
+                    </div>
+                </div>
+                <div class="navbar-end">
+                    <div class="navbar-item">
+                        <a href="{% url 'cart:cart' %}" class="button is-dark" aria-hidden="true">
+                            <span>Cart{% if cart %}({{ cart|length }}){% endif %}</span>
+                                <span class="icon is-medium"><i class="fas fa-shopping-cart"></i></span>
+                        </a>
+                    </div>
+
+                    <div class="navbar-item">
+                        {% if user.is_authenticated %}
+                            <a href="{% url 'main:pinventory' %}">{{ user.username }}</a>
+                            <a href="{% url 'logout' %}" class="button is-dark">logout</a>
+
+                        {% else %}
+                            <a href="{% url 'login' %}" class="button is-dark">Sign In</a>
+                        {% endif %}
+                    </div>
+                </div>
+            </nav>
+        </div>
+            <div>
+                {% block content %}
+                {% endblock %}
+            </div>
+        <div>
+            {% if messages %}
+                {% for message in messages %}
+                    <div class="notification is-success is-toast">{{ message }}</div>
+                {% endfor %}
+            {% endif %}
+        </div>
+    <script type="text/javascript" src="{% static 'scripts/main.js' %}"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+    <script src="https://kit.fontawesome.com/8002f83e68.js" crossorigin="anonymous"></script>
+    <script type="text/javascript" src="{% static 'scripts/cart.js' %}"></script>
+
+        {% block scripts %}
+        {% endblock %}
+
+    </body>
+</html>
